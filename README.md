@@ -25,15 +25,25 @@ Vue.use(Dropdown)
 ```
 
 ## Slots
-Customise button
+#####button
+Replaces the button entirely
+``` html
+<dropdown ref="dropdown">
+    <button slot="button" class="flex items-center" @click="handleClick">
+        <div class="mr-2">Menu</div>
+        <i class="fas fa-caret-down"></i>
+    </button>
+</dropdown>
+```
+Note: if you replace the button entirely you will need to manually handle the toggling of the dropdown via a ref to the dropdown component e.g. `this.$refs.dropdown.toggle()`
+
+#####button-content
+Replaces the content inside the button
 ``` html
 <dropdown>
-    <template slot="button">
-        <div class="flex items-center">
-            <div class="mr-2">Menu</div>
-            <i class="fas fa-caret-down"></i>
-        </div>
-    </template>
+    <div slot="button-content" class="p-2">
+        <i class="fas fa-ellipsis-h"></i>
+    </div>
 </dropdown>
 ```
 
