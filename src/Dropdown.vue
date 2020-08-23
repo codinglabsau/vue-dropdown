@@ -1,12 +1,14 @@
 <template>
   <div class="vue-dropdown relative inline-block text-left">
-    <div>
+    <div v-on-clickaway="hide">
       <slot name="button">
-        <button @click="toggle" v-on-clickaway="hide" @keydown.esc="hide" type="button" :class="textClasses">
-          <span v-html="text" />
-          <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-          </svg>
+        <button @click="toggle" @keydown.esc="hide" type="button" :class="textClasses">
+          <slot name="button-content">
+            <span v-html="text" />
+            <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </slot>
         </button>
       </slot>
     </div>
@@ -22,10 +24,12 @@
 </template>
 
 <script>
-  import { mixin as clickaway } from 'vue-clickaway'
+  import { directive as onClickaway } from 'vue-clickaway2'
 
   export default {
-    mixins: [clickaway],
+    directives: {
+      onClickaway
+    },
 
     props: {
       text: {
